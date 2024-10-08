@@ -1,5 +1,5 @@
 # binary name 
-TARGET_NAME := SampleTTS
+TARGET_NAME := HandlerTTS
 
 # tool macros
 CXX := g++
