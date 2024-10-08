@@ -31,12 +31,23 @@ void textToSpeech(const std::string& inputTextFile, const std::string& outputAud
 
     // Convert text to uppercase and ignore non-alphabetical characters
     std::vector<std::string> audioFiles;
-    for (char& c : text) {
-        c = std::toupper(c);
+    for (size_t i = 0; i < text.size(); ++i) {
+        char c = std::toupper(text[i]);
         if (c >= 'A' && c <= 'Z') {
             // Map each character to the corresponding audio file
             std::string filename = "Alphabet/" + std::string(1, c) + ".mp3";
             audioFiles.push_back(filename);
+        } else if (c == ' ') {
+            // Insert a pause for spaces between words
+            audioFiles.push_back("Alphabet/pause.mp3");
+        }
+        else if (c == ',') {
+            // Insert a pause for spaces between words
+            audioFiles.push_back("Alphabet/coma.mp3");
+        }
+        else if (c == '.') {
+            // Insert a pause for spaces between words
+            audioFiles.push_back("Alphabet/dot.mp3");
         }
     }
 
@@ -65,7 +76,7 @@ void textToSpeech(const std::string& inputTextFile, const std::string& outputAud
 
     // Check if the speed-up step succeeded
     if (speedUpResult == 0) {
-        std::cout << "Audio file created successfully with 800% speed-up: " << outputAudioFile << std::endl;
+        std::cout << "Audio file created successfully with 500% speed-up: " << outputAudioFile << std::endl;
     } else {
         std::cerr << "Error: Failed to speed up audio file." << std::endl;
     }
